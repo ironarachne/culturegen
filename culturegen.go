@@ -1,19 +1,27 @@
 package culturegen
 
 import (
-  "math/rand"
-  "strings"
-
-  "github.com/ironarachne/random"
+	"strings"
 )
 
-// Culture is a culture
+// Culture is a fantasy culture
 type Culture struct {
+	Name                string
+	Adjective           string
+	LanguageName        string
+	LanguageDescriptors []string
 }
 
-// Generate generates a culture
-func Generate() {
-  culture := Culture{}
+// GenerateCulture generates a culture
+func GenerateCulture() Culture {
+	culture := Culture{}
 
-  return culture
+	languageCategory := randomLanguageCategory()
+
+	culture.Name = strings.Title(randomName(languageCategory))
+	culture.Adjective = deriveAdjective(culture.Name)
+	culture.LanguageName = culture.Adjective
+	culture.LanguageDescriptors = append(culture.LanguageDescriptors, languageCategory.Name)
+
+	return culture
 }
