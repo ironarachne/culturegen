@@ -10,6 +10,7 @@ type Culture struct {
 	Adjective           string
 	LanguageName        string
 	LanguageDescriptors []string
+	MusicStyle          MusicStyle
 }
 
 // GenerateCulture generates a culture
@@ -22,6 +23,7 @@ func GenerateCulture() Culture {
 	culture.Adjective = deriveAdjective(culture.Name)
 	culture.LanguageName = culture.Adjective
 	culture.LanguageDescriptors = append(culture.LanguageDescriptors, languageCategory.Name)
+	culture.MusicStyle = randomMusicStyle()
 
 	return culture
 }
