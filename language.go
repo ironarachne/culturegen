@@ -7,6 +7,16 @@ import (
 	"github.com/ironarachne/random"
 )
 
+// Language is a fantasy language
+type Language struct {
+	Name          string
+	Adjective     string
+	Descriptors   []string
+	Category      LanguageCategory
+	Tonal         bool
+	WritingSystem WritingSystem
+}
+
 // LanguageCategory is a style of language
 type LanguageCategory struct {
 	Name       string
@@ -20,6 +30,12 @@ type LanguageCategory struct {
 type LanguageMutation struct {
 	From string
 	To   string
+}
+
+// WritingSystem is a system of writing
+type WritingSystem struct {
+	Name           string
+	Classification string
 }
 
 var (
@@ -96,38 +112,28 @@ func randomLanguageCategory() LanguageCategory {
 	return languageCategories[rand.Intn(len(languageCategories)-1)]
 }
 
-func randomMutation() LanguageMutation {
-	rules := []LanguageMutation{
-		LanguageMutation{
-			"s",
-			"ss",
-		},
-		LanguageMutation{
-			"s",
-			"sh",
-		},
-		LanguageMutation{
-			"f",
-			"ff",
-		},
-		LanguageMutation{
-			"f",
-			"fh",
-		},
-		LanguageMutation{
-			"g",
-			"gh",
-		},
-		LanguageMutation{
-			"l",
-			"l'",
-		},
+func randomLanguage() Language {
+	var language Language
+
+	language.Category = randomLanguageCategory()
+	language.Name = strings.Title(randomLanguageName(language.Category))
+	language.Descriptors = append(language.Descriptors, language.Category.Name)
+	language.Adjective = deriveAdjective(language.Name)
+
+	tonalChance := rand.Intn(10) + 1
+	if tonalChance > 7 {
+		language.Tonal = true
+	} else {
+		language.Tonal = false
 	}
 
-	return rules[rand.Intn(len(rules)-1)]
+	language.WritingSystem = randomWritingSystem()
+	language.WritingSystem.Name = language.Adjective
+
+	return language
 }
 
-func randomName(languageCategory LanguageCategory) string {
+func randomLanguageName(languageCategory LanguageCategory) string {
 	var name string
 	var syllables []string
 	skewLonger := false
@@ -163,6 +169,37 @@ func randomName(languageCategory LanguageCategory) string {
 	return name
 }
 
+func randomMutation() LanguageMutation {
+	rules := []LanguageMutation{
+		LanguageMutation{
+			"s",
+			"ss",
+		},
+		LanguageMutation{
+			"s",
+			"sh",
+		},
+		LanguageMutation{
+			"f",
+			"ff",
+		},
+		LanguageMutation{
+			"f",
+			"fh",
+		},
+		LanguageMutation{
+			"g",
+			"gh",
+		},
+		LanguageMutation{
+			"l",
+			"l'",
+		},
+	}
+
+	return rules[rand.Intn(len(rules)-1)]
+}
+
 func randomSyllable(category LanguageCategory, role string) string {
 	syllable := random.Item(category.Initiators) + random.Item(vowels)
 	expand := rand.Intn(10) + 1
@@ -175,4 +212,22 @@ func randomSyllable(category LanguageCategory, role string) string {
 	}
 
 	return syllable
+}
+
+func randomWritingSystem() WritingSystem {
+	var writingSystem WritingSystem
+
+	classifications := []string{
+		"abjad",
+		"abugida",
+		"alphabet",
+		"ideograms",
+		"pictograms",
+		"semanto-phonetic",
+		"syllabary",
+	}
+
+	writingSystem.Classification = random.Item(classifications)
+
+	return writingSystem
 }
