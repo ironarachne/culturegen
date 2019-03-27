@@ -1,6 +1,11 @@
 package culturegen
 
-import "github.com/ironarachne/random"
+import (
+	"math/rand"
+
+	"github.com/ironarachne/climategen"
+	"github.com/ironarachne/random"
+)
 
 // FoodStyle is a cultural food style
 type FoodStyle struct {
@@ -9,6 +14,7 @@ type FoodStyle struct {
 	CookingTechniques []string
 	CommonDishes      []string
 	EatingTraits      []string
+	Breads            []string
 }
 
 func (culture Culture) generateFoodStyle() FoodStyle {
@@ -33,6 +39,7 @@ func (culture Culture) generateFoodStyle() FoodStyle {
 	foodStyle.CookingTechniques = randomCookingTechniques()
 
 	foodStyle.CommonDishes = foodStyle.randomDishes()
+	foodStyle.Breads = culture.randomBreads()
 	foodStyle.EatingTraits = randomEatingTraits()
 
 	return foodStyle
@@ -62,6 +69,52 @@ func randomCookingTechniques() []string {
 	}
 
 	return techniques
+}
+
+func (culture Culture) randomBread() string {
+	bread := ""
+	breadTypes := []string{
+		"flat",
+		"round",
+		"thin",
+		"brick-like",
+	}
+
+	flavors := []string{
+		"bitter",
+		"grainy",
+		"hearty",
+		"nutty",
+		"savory",
+		"sweet",
+	}
+	grains := climategen.ListResourcesOfType("grain", culture.HomeClimate.Resources)
+
+	if len(grains) > 0 {
+		grain := grains[rand.Intn(len(grains)-1)]
+
+		bread = random.Item(flavors) + " " + random.Item(breadTypes) + " " + grain.Name + " bread"
+	}
+
+	return bread
+}
+
+func (culture Culture) randomBreads() []string {
+	var bread string
+	var breads []string
+
+	grains := climategen.ListResourcesOfType("grain", culture.HomeClimate.Resources)
+	if len(grains) > 0 {
+		numberOfBreads := rand.Intn(3) + 1
+		for i := 0; i < numberOfBreads; i++ {
+			bread = culture.randomBread()
+			if !inSlice(bread, breads) {
+				breads = append(breads, bread)
+			}
+		}
+	}
+
+	return breads
 }
 
 func (style FoodStyle) randomDishes() []string {
