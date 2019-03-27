@@ -18,6 +18,7 @@ type Culture struct {
 	Superstition  int
 	HomeClimate   climategen.Climate
 	ClothingStyle ClothingStyle
+	FoodStyle     FoodStyle
 }
 
 // GenerateCulture generates a culture
@@ -37,6 +38,7 @@ func GenerateCulture() Culture {
 
 	culture.HomeClimate = climategen.Generate()
 	culture.ClothingStyle = culture.generateClothingStyle()
+	culture.FoodStyle = culture.generateFoodStyle()
 
 	return culture
 }
@@ -44,4 +46,5 @@ func GenerateCulture() Culture {
 func (culture Culture) setClimate(climate string) {
 	culture.HomeClimate = climategen.GetClimate(climate)
 	culture.ClothingStyle = culture.generateClothingStyle()
+	culture.FoodStyle = culture.generateFoodStyle()
 }
