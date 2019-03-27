@@ -8,17 +8,18 @@ import (
 
 // Culture is a fantasy culture
 type Culture struct {
-	Name          string
-	Adjective     string
-	Language      Language
-	MusicStyle    MusicStyle
-	Aggression    int
-	Curiosity     int
-	Rigidity      int
-	Superstition  int
-	HomeClimate   climategen.Climate
-	ClothingStyle ClothingStyle
-	FoodStyle     FoodStyle
+	Name            string
+	Adjective       string
+	Language        Language
+	MusicStyle      MusicStyle
+	Aggression      int
+	Curiosity       int
+	Rigidity        int
+	Superstition    int
+	HomeClimate     climategen.Climate
+	ClothingStyle   ClothingStyle
+	FoodStyle       FoodStyle
+	AlcoholicDrinks []Drink
 }
 
 // GenerateCulture generates a culture
@@ -39,6 +40,7 @@ func GenerateCulture() Culture {
 	culture.HomeClimate = climategen.Generate()
 	culture.ClothingStyle = culture.generateClothingStyle()
 	culture.FoodStyle = culture.generateFoodStyle()
+	culture.AlcoholicDrinks = culture.generateDrinks()
 
 	return culture
 }
@@ -47,4 +49,5 @@ func (culture Culture) setClimate(climate string) {
 	culture.HomeClimate = climategen.GetClimate(climate)
 	culture.ClothingStyle = culture.generateClothingStyle()
 	culture.FoodStyle = culture.generateFoodStyle()
+	culture.AlcoholicDrinks = culture.generateDrinks()
 }

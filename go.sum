@@ -21,6 +21,8 @@ github.com/ironarachne/climategen v0.0.0-20190327143621-db7061fa3df2 h1:Od5FrCYT
 github.com/ironarachne/climategen v0.0.0-20190327143621-db7061fa3df2/go.mod h1:TuTO57PET6ncxlniY11T3sm1/oSErCRyDEhWCws57Z4=
 github.com/ironarachne/climategen v0.0.0-20190327144528-2698e55bc46c h1:HKORaIITWQHCtKRs5cMt8qAJSj1TIQCNUS38/8656lk=
 github.com/ironarachne/climategen v0.0.0-20190327144528-2698e55bc46c/go.mod h1:TuTO57PET6ncxlniY11T3sm1/oSErCRyDEhWCws57Z4=
+github.com/ironarachne/climategen v0.0.0-20190327152637-049f5199f1a8 h1:0vhenDN83AwksqxPQbUshL88f66NgRTVJODBv1Dn+xA=
+github.com/ironarachne/climategen v0.0.0-20190327152637-049f5199f1a8/go.mod h1:TuTO57PET6ncxlniY11T3sm1/oSErCRyDEhWCws57Z4=
 github.com/ironarachne/random v0.0.0-20190325170425-9caaa0b3405a h1:Wf3LfJ3RJ9m7WFveQs/S6I/NkNiviSfew9afED9BPS0=
 github.com/ironarachne/random v0.0.0-20190325170425-9caaa0b3405a/go.mod h1:YUzpzLiGzz2YTOhXMk61UBGze9jiaKfpFXF6YF2nd2Q=
 github.com/ironarachne/utility v0.0.0-20181021125830-32a6c250e33b h1:EhG1yiJbIUwbHhtAAqoPxW0ClJnE9W5HLSyHSu9gVk8=
