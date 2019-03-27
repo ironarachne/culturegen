@@ -12,6 +12,7 @@ type Culture struct {
 	Adjective       string
 	Language        Language
 	MusicStyle      MusicStyle
+	AttributeMax    int
 	Aggression      int
 	Curiosity       int
 	Rigidity        int
@@ -32,10 +33,11 @@ func GenerateCulture() Culture {
 	culture.Adjective = culture.Language.Adjective
 	culture.MusicStyle = randomMusicStyle()
 
-	culture.Aggression = rand.Intn(10) + 1
-	culture.Curiosity = rand.Intn(10) + 1
-	culture.Rigidity = rand.Intn(10) + 1
-	culture.Superstition = rand.Intn(10) + 1
+	culture.AttributeMax = 10
+	culture.Aggression = rand.Intn(culture.AttributeMax) + 1
+	culture.Curiosity = rand.Intn(culture.AttributeMax) + 1
+	culture.Rigidity = rand.Intn(culture.AttributeMax) + 1
+	culture.Superstition = rand.Intn(culture.AttributeMax) + 1
 
 	culture.HomeClimate = climategen.Generate()
 	culture.ClothingStyle = culture.generateClothingStyle()
