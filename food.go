@@ -68,8 +68,18 @@ func (style FoodStyle) randomDishes() []string {
 	var dishes []string
 	var dish string
 
+	flavors := []string{
+		"spicy",
+		"sweet",
+		"sour",
+		"pungent",
+		"salty",
+		"savory",
+		"bitter",
+	}
+
 	for i := 0; i < 5; i++ {
-		dish = random.Item(style.CookingTechniques) + " " + random.Item(style.CommonBases) + " with " + random.Item(style.CommonSpices)
+		dish = random.Item(flavors) + " " + random.Item(style.CookingTechniques) + " " + random.Item(style.CommonBases) + " with " + random.Item(style.CommonSpices)
 
 		if !inSlice(dish, dishes) {
 			dishes = append(dishes, dish)

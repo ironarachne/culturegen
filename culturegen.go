@@ -24,6 +24,7 @@ type Culture struct {
 	ClothingStyle     ClothingStyle
 	FoodStyle         FoodStyle
 	AlcoholicDrinks   []Drink
+	Religion          Religion
 }
 
 // GenerateCulture generates a culture
@@ -50,6 +51,8 @@ func GenerateCulture() Culture {
 	culture.ClothingStyle = culture.generateClothingStyle()
 	culture.FoodStyle = culture.generateFoodStyle()
 	culture.AlcoholicDrinks = culture.generateDrinks()
+
+	culture.Religion = culture.generateReligion()
 
 	return culture
 }

@@ -44,13 +44,14 @@ type WritingSystem struct {
 var (
 	consonants = []string{"b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"}
 	vowels     = []string{"a", "e", "i", "o", "u"}
-	glottals   = []string{"g", "k"}
+	glottals   = []string{"g", "k", "ch"}
 	velars     = []string{"k", "g", "ng", "w"}
 	sibilants  = []string{"s", "f"}
 	fricatives = []string{"f", "v", "th", "ð", "s", "z", "∫", "zh"}
 	liquids    = []string{"l", "r"}
 	nasals     = []string{"m", "n", "ng"}
 	glides     = []string{"j", "w"}
+	growls     = []string{"br", "tr", "gr", "dr", "kr"}
 	stops      = []string{"p", "b", "t", "d", "k", "g"}
 )
 
@@ -115,12 +116,12 @@ func randomLanguageCategory() LanguageCategory {
 			liquids,
 			sibilants,
 			[]string{"ion", "on", "en", "o"},
-			[]string{"i", "a", "ia"},
+			[]string{"i", "a", "ia", "ila"},
 		},
 		LanguageCategory{
 			"guttural",
 			1,
-			glottals,
+			append(glottals, growls...),
 			velars,
 			velars,
 			[]string{"ur", "ar", "ach", "ag"},
@@ -236,7 +237,24 @@ func randomMutation() LanguageMutation {
 	return rules[rand.Intn(len(rules)-1)]
 }
 
-// RandomName generates a random first name using the language
+// RandomGenderedName generates a random gendered first name
+func (language Language) RandomGenderedName(gender string) string {
+	var endings []string
+
+	name := language.RandomName()
+
+	if gender == "male" {
+		endings = language.Category.MasculineEndings
+	} else {
+		endings = language.Category.FeminineEndings
+	}
+
+	name = name + random.Item(endings)
+
+	return name
+}
+
+// RandomName generates a random name using the language
 func (language Language) RandomName() string {
 	var name string
 	var syllables []string

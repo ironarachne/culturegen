@@ -10,6 +10,7 @@ github.com/flosch/pongo2 v0.0.0-20181225140029-79872a7b2769/go.mod h1:tbAXHifHQW
 github.com/go-check/check v1.0.0-20180628173108-788fd7840127/go.mod h1:9ES+weclKsC9YodN5RgxqK/VD9HM9JsCSh7rNhMZE98=
 github.com/go-chi/chi v4.0.2+incompatible h1:maB6vn6FqCxrpz4FqWdh4+lwpyZIQS7YEAUcHlgXVRs=
 github.com/go-chi/chi v4.0.2+incompatible/go.mod h1:eB3wogJHnLi3x/kFX2A+IbTBlXxmMeXJVKy9tTv1XzQ=
+github.com/go-chi/render v1.0.1/go.mod h1:pq4Rr7HbnsdaeHagklXub+p6Wd16Af5l9koip1OvJns=
 github.com/iris-contrib/blackfriday v2.0.0+incompatible/go.mod h1:UzZ2bDEoaSGPbkg6SAB4att1aAwTmVIx/5gCVqeyUdI=
 github.com/iris-contrib/formBinder v0.0.0-20190104093907-fbd5963f41e1/go.mod h1:i8kTYUOEstd/S8TG0ChTXQdf4ermA/e8vJX0+QruD9w=
 github.com/iris-contrib/go.uuid v2.0.0+incompatible/go.mod h1:iz2lgM/1UnEf1kP0L/+fafWORmlnuysV2EMP8MW+qe0=
@@ -23,6 +24,15 @@ github.com/ironarachne/climategen v0.0.0-20190327144528-2698e55bc46c h1:HKORaIIT
 github.com/ironarachne/climategen v0.0.0-20190327144528-2698e55bc46c/go.mod h1:TuTO57PET6ncxlniY11T3sm1/oSErCRyDEhWCws57Z4=
 github.com/ironarachne/climategen v0.0.0-20190327152637-049f5199f1a8 h1:0vhenDN83AwksqxPQbUshL88f66NgRTVJODBv1Dn+xA=
 github.com/ironarachne/climategen v0.0.0-20190327152637-049f5199f1a8/go.mod h1:TuTO57PET6ncxlniY11T3sm1/oSErCRyDEhWCws57Z4=
+github.com/ironarachne/naminglanguage v0.0.0-20181009131908-d2337dcdc3f6/go.mod h1:RRZ/YORWnRdgF/WP8aWOb9If3tzcAyXGQtJGIGQN2w0=
+github.com/ironarachne/naminglanguage v0.0.0-20190326140911-90c4c9184634 h1:p9Rg9Xt34r+oEmZ+sWz49ef2dCVTCN0z+cHsJaoo6eg=
+github.com/ironarachne/naminglanguage v0.0.0-20190326140911-90c4c9184634/go.mod h1:iQlQfXBFCQzoRgnBym09tjmTfI3gRBmxactk18WNP0A=
+github.com/ironarachne/pantheon v0.0.0-20190326135252-e015a47a26c2 h1:cZugFWK1YZ50bWSOxOiexKHEy7l5XLBCOB5IUeuoKL0=
+github.com/ironarachne/pantheon v0.0.0-20190326135252-e015a47a26c2/go.mod h1:L508bfiEkDvMXj05TP+lQR45h5mApWnzhrS2PmFwy5o=
+github.com/ironarachne/pantheon v0.0.0-20190327170443-d3873b580dc6 h1:BCoyQRKOoZqDNnML5AlHKAOBpuvZ6Z10TTbxjH+E0XU=
+github.com/ironarachne/pantheon v0.0.0-20190327170443-d3873b580dc6/go.mod h1:L508bfiEkDvMXj05TP+lQR45h5mApWnzhrS2PmFwy5o=
+github.com/ironarachne/pantheon v0.0.0-20190327172518-872153edc795 h1:SqfOZxI0WlOTcC5OYUzp3cHbZacaSoDyyw67eOH+lwc=
+github.com/ironarachne/pantheon v0.0.0-20190327172518-872153edc795/go.mod h1:L508bfiEkDvMXj05TP+lQR45h5mApWnzhrS2PmFwy5o=
 github.com/ironarachne/random v0.0.0-20190325170425-9caaa0b3405a h1:Wf3LfJ3RJ9m7WFveQs/S6I/NkNiviSfew9afED9BPS0=
 github.com/ironarachne/random v0.0.0-20190325170425-9caaa0b3405a/go.mod h1:YUzpzLiGzz2YTOhXMk61UBGze9jiaKfpFXF6YF2nd2Q=
 github.com/ironarachne/utility v0.0.0-20181021125830-32a6c250e33b h1:EhG1yiJbIUwbHhtAAqoPxW0ClJnE9W5HLSyHSu9gVk8=
@@ -63,6 +73,7 @@ golang.org/x/tools v0.0.0-20181221001348-537d06c36207/go.mod h1:n7NCudcB/nEzxVGm
 golang.org/x/tools v0.0.0-20190325161752-5a8dccf5b48a/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 golang.org/x/tools v0.0.0-20190326204419-b8c0eb491124/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 golang.org/x/tools v0.0.0-20190327011446-79af862e6737/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
+golang.org/x/tools v0.0.0-20190327165041-45dd101d8784/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce/go.mod h1:yeKp02qBN3iKW1OzL3MGk2IdtZzaj7SFntXj72NppTA=
