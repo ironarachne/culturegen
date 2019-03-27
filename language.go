@@ -13,7 +13,7 @@ type Language struct {
 	Adjective     string
 	Descriptors   []string
 	Category      LanguageCategory
-	Tonal         bool
+	IsTonal       bool
 	WritingSystem WritingSystem
 }
 
@@ -36,6 +36,7 @@ type LanguageMutation struct {
 type WritingSystem struct {
 	Name           string
 	Classification string
+	StrokeType     string
 }
 
 var (
@@ -122,9 +123,9 @@ func randomLanguage() Language {
 
 	tonalChance := rand.Intn(10) + 1
 	if tonalChance > 7 {
-		language.Tonal = true
+		language.IsTonal = true
 	} else {
-		language.Tonal = false
+		language.IsTonal = false
 	}
 
 	language.WritingSystem = randomWritingSystem()
@@ -214,6 +215,19 @@ func randomSyllable(category LanguageCategory, role string) string {
 	return syllable
 }
 
+func randomStrokeType() string {
+	strokeTypes := []string{
+		"arcs and loops",
+		"dots and slashes",
+		"flowing",
+		"geometric shapes",
+		"right angles",
+		"runic",
+	}
+
+	return random.Item(strokeTypes)
+}
+
 func randomWritingSystem() WritingSystem {
 	var writingSystem WritingSystem
 
@@ -228,6 +242,7 @@ func randomWritingSystem() WritingSystem {
 	}
 
 	writingSystem.Classification = random.Item(classifications)
+	writingSystem.StrokeType = randomStrokeType()
 
 	return writingSystem
 }
