@@ -19,11 +19,13 @@ type Language struct {
 
 // LanguageCategory is a style of language
 type LanguageCategory struct {
-	Name       string
-	WordLength int
-	Initiators []string
-	Connectors []string
-	Finishers  []string
+	Name             string
+	WordLength       int
+	Initiators       []string
+	Connectors       []string
+	Finishers        []string
+	MasculineEndings []string
+	FeminineEndings  []string
 }
 
 // LanguageMutation is a word mutation
@@ -71,6 +73,31 @@ func deriveAdjective(name string) string {
 	return adjective
 }
 
+func (language Language) generateNameList(nameType string) []string {
+	var names []string
+	var name string
+	var endings []string
+
+	if nameType == "male" {
+		endings = language.Category.MasculineEndings
+	} else if nameType == "female" {
+		endings = language.Category.FeminineEndings
+	} else {
+		for i := 0; i < 5; i++ {
+			endings = append(endings, randomSyllable(language.Category, "finisher"))
+		}
+	}
+
+	for i := 0; i < 10; i++ {
+		name = language.RandomName() + random.Item(endings)
+		if !inSlice(name, names) {
+			names = append(names, name)
+		}
+	}
+
+	return names
+}
+
 func mutateName(name string) string {
 	mutation := randomMutation()
 
@@ -87,6 +114,8 @@ func randomLanguageCategory() LanguageCategory {
 			fricatives,
 			liquids,
 			sibilants,
+			[]string{"ion", "on", "en", "o"},
+			[]string{"i", "a", "ia"},
 		},
 		LanguageCategory{
 			"guttural",
@@ -94,6 +123,8 @@ func randomLanguageCategory() LanguageCategory {
 			glottals,
 			velars,
 			velars,
+			[]string{"ur", "ar", "ach", "ag"},
+			[]string{"a", "agi"},
 		},
 		LanguageCategory{
 			"abrupt",
@@ -101,6 +132,8 @@ func randomLanguageCategory() LanguageCategory {
 			stops,
 			fricatives,
 			liquids,
+			[]string{"on", "en", "an"},
+			[]string{"a", "e", "et"},
 		},
 		LanguageCategory{
 			"nasal",
@@ -108,6 +141,8 @@ func randomLanguageCategory() LanguageCategory {
 			glottals,
 			stops,
 			nasals,
+			[]string{"een", "oon", "in", "en"},
+			[]string{"ini", "nia", "mia", "mi"},
 		},
 	}
 	return languageCategories[rand.Intn(len(languageCategories)-1)]
@@ -199,6 +234,45 @@ func randomMutation() LanguageMutation {
 	}
 
 	return rules[rand.Intn(len(rules)-1)]
+}
+
+// RandomName generates a random first name using the language
+func (language Language) RandomName() string {
+	var name string
+	var syllables []string
+	skewLonger := false
+
+	if rand.Intn(10) > 7 {
+		skewLonger = true
+	}
+
+	randomLength := rand.Intn(language.Category.WordLength) + 1
+
+	if skewLonger {
+		randomLength++
+	}
+
+	role := "connector"
+
+	for i := 0; i < randomLength; i++ {
+		if randomLength-i == 1 {
+			role = "finisher"
+		}
+		syllables = append(syllables, randomSyllable(language.Category, role))
+	}
+
+	for _, syllable := range syllables {
+		name += syllable
+	}
+
+	chance := rand.Intn(10) + 1
+	if chance > 3 {
+		name = mutateName(name)
+	}
+
+	name = strings.Title(name)
+
+	return name
 }
 
 func randomSyllable(category LanguageCategory, role string) string {
