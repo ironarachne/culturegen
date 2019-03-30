@@ -91,7 +91,7 @@ func (culture Culture) randomBread() string {
 	grains := climategen.ListResourcesOfType("grain", culture.HomeClimate.Resources)
 
 	if len(grains) > 0 {
-		grain := grains[rand.Intn(len(grains)-1)]
+		grain := grains[rand.Intn(len(grains))]
 
 		bread = random.Item(flavors) + " " + random.Item(breadTypes) + " " + grain.Name + " bread"
 	}
