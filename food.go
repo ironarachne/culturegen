@@ -21,13 +21,13 @@ func (culture Culture) generateFoodStyle() FoodStyle {
 	foodStyle := FoodStyle{}
 
 	for _, r := range culture.HomeClimate.Resources {
-		if inSlice("meat", r.Types) {
+		if r.Type == "meat" {
 			foodStyle.CommonBases = append(foodStyle.CommonBases, r.Name)
-		} else if inSlice("spice", r.Types) {
+		} else if r.Type == "spice" {
 			foodStyle.CommonSpices = append(foodStyle.CommonSpices, r.Name)
-		} else if inSlice("fruit", r.Types) {
+		} else if r.Type == "fruit" {
 			foodStyle.CommonBases = append(foodStyle.CommonBases, r.Name)
-		} else if inSlice("vegetable", r.Types) {
+		} else if r.Type == "vegetable" {
 			foodStyle.CommonBases = append(foodStyle.CommonBases, r.Name)
 		}
 	}
@@ -54,6 +54,7 @@ func randomCookingTechniques() []string {
 		"basted",
 		"broiled",
 		"curried",
+		"dried",
 		"fried",
 		"raw",
 		"roasted",

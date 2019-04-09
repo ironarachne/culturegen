@@ -25,6 +25,10 @@ github.com/ironarachne/climategen v0.0.0-20190327144528-2698e55bc46c h1:HKORaIIT
 github.com/ironarachne/climategen v0.0.0-20190327144528-2698e55bc46c/go.mod h1:TuTO57PET6ncxlniY11T3sm1/oSErCRyDEhWCws57Z4=
 github.com/ironarachne/climategen v0.0.0-20190327152637-049f5199f1a8 h1:0vhenDN83AwksqxPQbUshL88f66NgRTVJODBv1Dn+xA=
 github.com/ironarachne/climategen v0.0.0-20190327152637-049f5199f1a8/go.mod h1:TuTO57PET6ncxlniY11T3sm1/oSErCRyDEhWCws57Z4=
+github.com/ironarachne/climategen v0.0.0-20190409185609-acd7f10ab5d0 h1:tW2FeKMR57HHfCkY5+TTNTW/x3O3nIB1UHex/BT9An4=
+github.com/ironarachne/climategen v0.0.0-20190409185609-acd7f10ab5d0/go.mod h1:TqVFYbF6+ZbTjibRg51yorH5IwR4ZxR2YCpiC4yONtY=
+github.com/ironarachne/climategen v0.0.0-20190409190235-cf94d164d412 h1:4EGpw7bQtUVpTcpyzwqILRqj4yk3z/Oqk4XhTA1BDEo=
+github.com/ironarachne/climategen v0.0.0-20190409190235-cf94d164d412/go.mod h1:TqVFYbF6+ZbTjibRg51yorH5IwR4ZxR2YCpiC4yONtY=
 github.com/ironarachne/naminglanguage v0.0.0-20181009131908-d2337dcdc3f6/go.mod h1:RRZ/YORWnRdgF/WP8aWOb9If3tzcAyXGQtJGIGQN2w0=
 github.com/ironarachne/naminglanguage v0.0.0-20190326140911-90c4c9184634 h1:p9Rg9Xt34r+oEmZ+sWz49ef2dCVTCN0z+cHsJaoo6eg=
 github.com/ironarachne/naminglanguage v0.0.0-20190326140911-90c4c9184634/go.mod h1:iQlQfXBFCQzoRgnBym09tjmTfI3gRBmxactk18WNP0A=
@@ -61,6 +65,7 @@ github.com/ryanuber/columnize v2.1.0+incompatible/go.mod h1:sm1tb6uqfes/u+d4ooFo
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
+golang.org/x/crypto v0.0.0-20190404164418-38d8ce5564a5/go.mod h1:WFFai1msRO1wXaEeE5yQxYXgSfI8pQAWXbQop6sCtWE=
 golang.org/x/net v0.0.0-20181023162649-9b4f9f5ad519/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/net v0.0.0-20181220203305-927f97764cc3/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/net v0.0.0-20190311183353-d8887717615a/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
@@ -68,9 +73,12 @@ golang.org/x/net v0.0.0-20190324223953-e3b2ff56ed87/go.mod h1:t9HGtf8HONx5eT2rtn
 golang.org/x/net v0.0.0-20190326090315-15845e8f865b/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20190327091125-710a502c58a2/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20190328230028-74de082e2cca/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
+golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20190322080309-f49334f85ddc/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190329044733-9eb1bfa1ce65/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20190403152447-81d4e9dc473e/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20190405154228-4b34438f7a67/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/tools v0.0.0-20181221001348-537d06c36207/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 golang.org/x/tools v0.0.0-20190325161752-5a8dccf5b48a/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
@@ -78,6 +86,7 @@ golang.org/x/tools v0.0.0-20190326204419-b8c0eb491124/go.mod h1:LCzVGOaR6xXOjkQ3
 golang.org/x/tools v0.0.0-20190327011446-79af862e6737/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 golang.org/x/tools v0.0.0-20190327165041-45dd101d8784/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 golang.org/x/tools v0.0.0-20190329225845-a96101f168f4/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
+golang.org/x/tools v0.0.0-20190409171012-9e5445377b7a/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce/go.mod h1:yeKp02qBN3iKW1OzL3MGk2IdtZzaj7SFntXj72NppTA=

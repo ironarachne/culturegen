@@ -38,12 +38,12 @@ func (culture Culture) generateClothingStyle() ClothingStyle {
 
 	if climategen.IsTypeInResources("precious metal", culture.HomeClimate.Resources) {
 		for _, r := range culture.HomeClimate.Resources {
-			if inSlice("precious metal", r.Types) {
+			if r.Type == "precious metal" {
 				style.CommonJewelry = append(style.CommonJewelry, r.Name+" necklaces")
 				style.CommonJewelry = append(style.CommonJewelry, r.Name+" rings")
 				style.CommonJewelry = append(style.CommonJewelry, r.Name+" bracelets")
 			}
-			if inSlice("gemstone", r.Types) {
+			if r.Type == "gem" {
 				style.CommonJewelry = append(style.CommonJewelry, "necklaces set with "+r.Name)
 				style.CommonJewelry = append(style.CommonJewelry, "pendants set with "+r.Name)
 				style.CommonJewelry = append(style.CommonJewelry, "rings set with "+r.Name)
