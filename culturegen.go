@@ -39,7 +39,6 @@ func GenerateCulture() Culture {
 
 	culture.Name = culture.Language.Name
 	culture.Adjective = culture.Language.Adjective
-	culture.MusicStyle = randomMusicStyle()
 
 	culture.AttributeMax = 10
 	culture.Aggression = rand.Intn(culture.AttributeMax) + 1
@@ -48,6 +47,7 @@ func GenerateCulture() Culture {
 	culture.Superstition = rand.Intn(culture.AttributeMax) + 1
 
 	culture.HomeClimate = climategen.Generate()
+	culture.MusicStyle = culture.randomMusicStyle()
 	culture.ClothingStyle = culture.generateClothingStyle()
 	culture.FoodStyle = culture.generateFoodStyle()
 	culture.AlcoholicDrinks = culture.generateDrinks()

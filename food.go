@@ -123,13 +123,15 @@ func (style FoodStyle) randomDishes() []string {
 	var dish string
 
 	flavors := []string{
-		"spicy",
-		"sweet",
-		"sour",
+		"aromatic",
+		"bitter",
 		"pungent",
 		"salty",
+		"saucy",
 		"savory",
-		"bitter",
+		"sour",
+		"spicy",
+		"sweet",
 	}
 
 	for i := 0; i < 5; i++ {
