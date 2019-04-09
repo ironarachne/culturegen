@@ -1,6 +1,9 @@
 package culturegen
 
 import (
+	"math/rand"
+	"strings"
+
 	"github.com/ironarachne/climategen"
 	"github.com/ironarachne/random"
 )
@@ -36,25 +39,70 @@ func (culture Culture) generateClothingStyle() ClothingStyle {
 		style.CommonMaterials = append(style.CommonMaterials, "oiled cloth")
 	}
 
-	if climategen.IsTypeInResources("precious metal", culture.HomeClimate.Resources) {
-		for _, r := range culture.HomeClimate.Resources {
-			if r.Type == "precious metal" {
-				style.CommonJewelry = append(style.CommonJewelry, r.Name+" necklaces")
-				style.CommonJewelry = append(style.CommonJewelry, r.Name+" rings")
-				style.CommonJewelry = append(style.CommonJewelry, r.Name+" bracelets")
-			}
-			if r.Type == "gem" {
-				style.CommonJewelry = append(style.CommonJewelry, "necklaces set with "+r.Name)
-				style.CommonJewelry = append(style.CommonJewelry, "pendants set with "+r.Name)
-				style.CommonJewelry = append(style.CommonJewelry, "rings set with "+r.Name)
-			}
-		}
-	}
+	style.CommonJewelry = culture.generateJewelry()
 
 	style.DecorativeStyle = culture.randomDecorativeStyle()
 	style.CommonColors = randomColorSet()
 
 	return style
+}
+
+func (culture Culture) generateJewelry() []string {
+	var jewelryItem string
+	var gemProbability int
+
+	jewelry := []string{}
+
+	descriptors := []string{
+		"brilliant",
+		"gaudy",
+		"lustrous",
+		"ornate",
+		"simple",
+	}
+
+	foundations := []string{
+		"anklets",
+		"bracelets",
+		"chokers",
+		"necklaces",
+		"rings",
+	}
+
+	settings := []string{
+		"adorned with",
+		"decorated with",
+		"set with",
+	}
+
+	materials := []string{}
+	gems := []string{}
+
+	for _, r := range culture.HomeClimate.Resources {
+		if r.Type == "metal ingot" {
+			materials = append(materials, strings.TrimSuffix(r.Name, " ingot"))
+		} else if r.Type == "metal bar" {
+			materials = append(materials, strings.TrimSuffix(r.Name, " bar"))
+		} else if r.Type == "gem" {
+			gems = append(gems, r.Name)
+		}
+	}
+
+	numberOfJewelryPieces := rand.Intn(4) + 1
+
+	for i := 0; i < numberOfJewelryPieces; i++ {
+		jewelryItem = random.Item(descriptors) + " " + random.Item(materials) + " " + random.Item(foundations)
+		if len(gems) > 0 {
+			gemProbability = rand.Intn(10) + 1
+			if gemProbability > 5 {
+				jewelryItem += " " + random.Item(settings) + " " + random.Item(gems)
+			}
+		}
+
+		jewelry = append(jewelry, jewelryItem)
+	}
+
+	return jewelry
 }
 
 func (culture Culture) randomDecorativeStyle() string {
