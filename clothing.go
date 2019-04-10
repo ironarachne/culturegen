@@ -8,35 +8,30 @@ import (
 	"github.com/ironarachne/random"
 )
 
+// ClothingItem is a type of clothing item
+type ClothingItem struct {
+	Name           string
+	Type           string
+	IdealHeatLevel string
+	Layer          int
+}
+
 // ClothingStyle describes what kind of clothing the culture wears
 type ClothingStyle struct {
-	CommonItems     []string
-	CommonJewelry   []string
-	CommonColors    []string
-	CommonMaterials []string
-	DecorativeStyle string
+	CommonFemaleItems []ClothingItem
+	CommonMaleItems   []ClothingItem
+	CommonJewelry     []string
+	CommonColors      []string
+	CommonMaterials   []string
+	DecorativeStyle   string
 }
 
 func (culture Culture) generateClothingStyle() ClothingStyle {
 	style := ClothingStyle{}
 
 	style.CommonMaterials = culture.getClothingFabrics()
-
-	if culture.HomeClimate.Temperature <= 3 {
-		style.CommonItems = []string{"mittens", "scarves", "fur hats", "long tunics", "long fur boots", "long coats", "hooded cloaks", "light underclothes", "long pants", "long dresses"}
-	} else if culture.HomeClimate.Temperature > 3 && culture.HomeClimate.Temperature <= 7 {
-		style.CommonItems = []string{"cloaks", "short tunics", "long pants", "long dresses", "short boots", "shoes"}
-	} else {
-		style.CommonItems = []string{"short tunics", "pantaloons", "skirts", "sandals", "light shoes", "short boots"}
-	}
-
-	if climategen.IsTypeInResources("mount", culture.HomeClimate.Resources) {
-		style.CommonItems = append(style.CommonItems, "riding boots")
-	}
-
-	if climategen.IsTypeInResources("oil", culture.HomeClimate.Resources) {
-		style.CommonMaterials = append(style.CommonMaterials, "oiled cloth")
-	}
+	style.CommonFemaleItems = culture.getClothingItems()
+	style.CommonMaleItems = culture.getClothingItems()
 
 	style.CommonJewelry = culture.generateJewelry()
 
@@ -102,6 +97,307 @@ func (culture Culture) generateJewelry() []string {
 	}
 
 	return jewelry
+}
+
+func (culture Culture) getClothingItems() []ClothingItem {
+	filteredItems := []ClothingItem{}
+
+	items := getAllClothingItems()
+	heatLevel := "warm"
+
+	if culture.HomeClimate.Temperature < 5 {
+		heatLevel = "cold"
+	}
+
+	items = getClothingItemsForHeat(heatLevel, items)
+
+	fullOrIndividual := rand.Intn(10)
+	if fullOrIndividual > 6 {
+		full := getClothingItemsForType("full", items)
+		if len(full) > 0 {
+			filteredItems = append(filteredItems, full[rand.Intn(len(full))])
+		}
+	} else {
+		bottoms := getClothingItemsForType("bottom", items)
+		tops := getClothingItemsForType("top", items)
+		if len(bottoms) > 0 {
+			filteredItems = append(filteredItems, bottoms[rand.Intn(len(bottoms))])
+		}
+		if len(tops) > 0 {
+			filteredItems = append(filteredItems, tops[rand.Intn(len(tops))])
+		}
+	}
+
+	footwear := getClothingItemsForType("footwear", items)
+	hats := getClothingItemsForType("headwear", items)
+	overwear := getClothingItemsForType("overwear", items)
+	underwear := getClothingItemsForType("underwear", items)
+	waist := getClothingItemsForType("waist", items)
+
+	if len(footwear) > 0 {
+		filteredItems = append(filteredItems, footwear[rand.Intn(len(footwear))])
+	}
+	if len(hats) > 0 {
+		filteredItems = append(filteredItems, hats[rand.Intn(len(hats))])
+	}
+	if len(overwear) > 0 {
+		filteredItems = append(filteredItems, overwear[rand.Intn(len(overwear))])
+	}
+	if len(underwear) > 0 {
+		filteredItems = append(filteredItems, underwear[rand.Intn(len(underwear))])
+	}
+	if len(waist) > 0 {
+		filteredItems = append(filteredItems, waist[rand.Intn(len(waist))])
+	}
+
+	return filteredItems
+}
+
+func getClothingItemsForHeat(heat string, source []ClothingItem) []ClothingItem {
+	items := []ClothingItem{}
+
+	for _, i := range source {
+		if i.IdealHeatLevel == heat || i.IdealHeatLevel == "any" {
+			items = append(items, i)
+		}
+	}
+
+	return items
+}
+
+func getClothingItemsForLayer(layer int, source []ClothingItem) []ClothingItem {
+	items := []ClothingItem{}
+
+	for _, i := range source {
+		if i.Layer == layer {
+			items = append(items, i)
+		}
+	}
+
+	return items
+}
+
+func getClothingItemsForType(clothingType string, source []ClothingItem) []ClothingItem {
+	items := []ClothingItem{}
+
+	for _, i := range source {
+		if i.Type == clothingType {
+			items = append(items, i)
+		}
+	}
+
+	return items
+}
+
+func getAllClothingItems() []ClothingItem {
+	items := []ClothingItem{
+		ClothingItem{
+			Name:           "short tunic",
+			Type:           "top",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "knee-length tunic",
+			Type:           "top",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "ankle-length tunic",
+			Type:           "top",
+			IdealHeatLevel: "cold",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "pantaloons",
+			Type:           "bottom",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "sleeveless shirt",
+			Type:           "top",
+			IdealHeatLevel: "warm",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "vest",
+			Type:           "top",
+			IdealHeatLevel: "any",
+			Layer:          2,
+		},
+		ClothingItem{
+			Name:           "loincloth",
+			Type:           "undergarment",
+			IdealHeatLevel: "any",
+			Layer:          0,
+		},
+		ClothingItem{
+			Name:           "breeches",
+			Type:           "bottom",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "long pants",
+			Type:           "bottom",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "sandals",
+			Type:           "footwear",
+			IdealHeatLevel: "warm",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "knee-high boots",
+			Type:           "footwear",
+			IdealHeatLevel: "cold",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "short boots",
+			Type:           "footwear",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "strapped boots",
+			Type:           "footwear",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "turnshoes",
+			Type:           "footwear",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "robe",
+			Type:           "full",
+			IdealHeatLevel: "cold",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "dress",
+			Type:           "full",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "belt",
+			Type:           "waist",
+			IdealHeatLevel: "any",
+			Layer:          3,
+		},
+		ClothingItem{
+			Name:           "sash",
+			Type:           "waist",
+			IdealHeatLevel: "any",
+			Layer:          3,
+		},
+		ClothingItem{
+			Name:           "skirt",
+			Type:           "bottom",
+			IdealHeatLevel: "warm",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "kilt",
+			Type:           "bottom",
+			IdealHeatLevel: "warm",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "short gloves",
+			Type:           "handwear",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "long gloves",
+			Type:           "handwear",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "mittens",
+			Type:           "handwear",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "short coat",
+			Type:           "overwear",
+			IdealHeatLevel: "cold",
+			Layer:          2,
+		},
+		ClothingItem{
+			Name:           "cloak",
+			Type:           "overwear",
+			IdealHeatLevel: "any",
+			Layer:          3,
+		},
+		ClothingItem{
+			Name:           "long coat",
+			Type:           "overwear",
+			IdealHeatLevel: "cold",
+			Layer:          2,
+		},
+		ClothingItem{
+			Name:           "hooded cloak",
+			Type:           "overwear",
+			IdealHeatLevel: "any",
+			Layer:          3,
+		},
+		ClothingItem{
+			Name:           "wide-brim hat",
+			Type:           "hat",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "fez",
+			Type:           "hat",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "conical hat",
+			Type:           "hat",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "skullcap",
+			Type:           "hat",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "kufi",
+			Type:           "hat",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "conical cap",
+			Type:           "hat",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+		ClothingItem{
+			Name:           "turban",
+			Type:           "hat",
+			IdealHeatLevel: "any",
+			Layer:          1,
+		},
+	}
+
+	return items
 }
 
 func (culture Culture) getClothingFabrics() []string {
