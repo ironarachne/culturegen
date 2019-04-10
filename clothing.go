@@ -20,14 +20,13 @@ type ClothingStyle struct {
 func (culture Culture) generateClothingStyle() ClothingStyle {
 	style := ClothingStyle{}
 
+	style.CommonMaterials = culture.getClothingFabrics()
+
 	if culture.HomeClimate.Temperature <= 3 {
-		style.CommonMaterials = []string{"thick hides", "furs", "thick wool", "linen"}
 		style.CommonItems = []string{"mittens", "scarves", "fur hats", "long tunics", "long fur boots", "long coats", "hooded cloaks", "light underclothes", "long pants", "long dresses"}
 	} else if culture.HomeClimate.Temperature > 3 && culture.HomeClimate.Temperature <= 7 {
-		style.CommonMaterials = []string{"cotton", "linen", "furs", "light hides"}
 		style.CommonItems = []string{"cloaks", "short tunics", "long pants", "long dresses", "short boots", "shoes"}
 	} else {
-		style.CommonMaterials = []string{"light linen", "light wool"}
 		style.CommonItems = []string{"short tunics", "pantaloons", "skirts", "sandals", "light shoes", "short boots"}
 	}
 
@@ -103,6 +102,32 @@ func (culture Culture) generateJewelry() []string {
 	}
 
 	return jewelry
+}
+
+func (culture Culture) getClothingFabrics() []string {
+	fabrics := []string{}
+
+	for _, i := range culture.HomeClimate.Plants {
+		if i.Name == "flax" {
+			fabrics = append(fabrics, "linen")
+		} else if i.IsFiber {
+			fabrics = append(fabrics, i.Name)
+		}
+	}
+
+	for _, i := range culture.HomeClimate.Animals {
+		if i.Name == "sheep" || i.Name == "goat" || i.Name == "alpaca" {
+			fabrics = append(fabrics, i.Name+" wool")
+		} else if i.Name == "cow" {
+			fabrics = append(fabrics, "leather")
+		} else if i.AnimalType == "reptile" {
+			fabrics = append(fabrics, i.Name+" skin")
+		} else if i.GivesHide {
+			fabrics = append(fabrics, i.Name+" hide")
+		}
+	}
+
+	return fabrics
 }
 
 func (culture Culture) randomDecorativeStyle() string {
