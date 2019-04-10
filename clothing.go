@@ -116,8 +116,10 @@ func (culture Culture) getClothingFabrics() []string {
 	}
 
 	for _, i := range culture.HomeClimate.Animals {
-		if i.Name == "sheep" || i.Name == "goat" || i.Name == "alpaca" {
+		if i.GivesWool {
 			fabrics = append(fabrics, i.Name+" wool")
+		} else if i.GivesFur {
+			fabrics = append(fabrics, i.Name+" fur")
 		} else if i.Name == "cow" {
 			fabrics = append(fabrics, "leather")
 		} else if i.AnimalType == "reptile" {

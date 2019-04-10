@@ -29,6 +29,8 @@ github.com/ironarachne/climategen v0.0.0-20190409185609-acd7f10ab5d0 h1:tW2FeKMR
 github.com/ironarachne/climategen v0.0.0-20190409185609-acd7f10ab5d0/go.mod h1:TqVFYbF6+ZbTjibRg51yorH5IwR4ZxR2YCpiC4yONtY=
 github.com/ironarachne/climategen v0.0.0-20190409190235-cf94d164d412 h1:4EGpw7bQtUVpTcpyzwqILRqj4yk3z/Oqk4XhTA1BDEo=
 github.com/ironarachne/climategen v0.0.0-20190409190235-cf94d164d412/go.mod h1:TqVFYbF6+ZbTjibRg51yorH5IwR4ZxR2YCpiC4yONtY=
+github.com/ironarachne/climategen v0.0.0-20190410161431-5460578cb815 h1:i2FExYXUrsQfaTkZ/Mncb0uxpqA4ZZGjMJdzvoq3XT0=
+github.com/ironarachne/climategen v0.0.0-20190410161431-5460578cb815/go.mod h1:TqVFYbF6+ZbTjibRg51yorH5IwR4ZxR2YCpiC4yONtY=
 github.com/ironarachne/naminglanguage v0.0.0-20181009131908-d2337dcdc3f6/go.mod h1:RRZ/YORWnRdgF/WP8aWOb9If3tzcAyXGQtJGIGQN2w0=
 github.com/ironarachne/naminglanguage v0.0.0-20190326140911-90c4c9184634 h1:p9Rg9Xt34r+oEmZ+sWz49ef2dCVTCN0z+cHsJaoo6eg=
 github.com/ironarachne/naminglanguage v0.0.0-20190326140911-90c4c9184634/go.mod h1:iQlQfXBFCQzoRgnBym09tjmTfI3gRBmxactk18WNP0A=
@@ -87,6 +89,7 @@ golang.org/x/tools v0.0.0-20190327011446-79af862e6737/go.mod h1:LCzVGOaR6xXOjkQ3
 golang.org/x/tools v0.0.0-20190327165041-45dd101d8784/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 golang.org/x/tools v0.0.0-20190329225845-a96101f168f4/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 golang.org/x/tools v0.0.0-20190409171012-9e5445377b7a/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
+golang.org/x/tools v0.0.0-20190410135722-7e5bf9270d70/go.mod h1:LCzVGOaR6xXOjkQ3onu1FJEFr0SW1gC7cKk1uF8kGRs=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce/go.mod h1:yeKp02qBN3iKW1OzL3MGk2IdtZzaj7SFntXj72NppTA=
