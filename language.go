@@ -21,6 +21,7 @@ type Language struct {
 type LanguageCategory struct {
 	Name             string
 	WordLength       int
+	UsesApostrophes  bool
 	Initiators       []string
 	Connectors       []string
 	Finishers        []string
@@ -44,15 +45,16 @@ type WritingSystem struct {
 var (
 	consonants = []string{"b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"}
 	vowels     = []string{"a", "e", "i", "o", "u"}
+	breaths    = []string{"h", "th", "f", "ch", "sh"}
+	fricatives = []string{"f", "v", "th", "ð", "s", "z", "ch", "zh"}
+	glides     = []string{"j", "w"}
 	glottals   = []string{"g", "k", "ch"}
-	velars     = []string{"k", "g", "ng", "w"}
-	sibilants  = []string{"s", "f"}
-	fricatives = []string{"f", "v", "th", "ð", "s", "z", "∫", "zh"}
+	growls     = []string{"br", "tr", "gr", "dr", "kr"}
 	liquids    = []string{"l", "r"}
 	nasals     = []string{"m", "n", "ng"}
-	glides     = []string{"j", "w"}
-	growls     = []string{"br", "tr", "gr", "dr", "kr"}
+	sibilants  = []string{"s", "f"}
 	stops      = []string{"p", "b", "t", "d", "k", "g"}
+	velars     = []string{"k", "g", "ng", "w"}
 )
 
 func deriveAdjective(name string) string {
@@ -74,7 +76,8 @@ func deriveAdjective(name string) string {
 	return adjective
 }
 
-func (language Language) generateNameList(nameType string) []string {
+// GenerateNameList generates a list of names appropriate for the language
+func (language Language) GenerateNameList(nameType string) []string {
 	var names []string
 	var name string
 	var endings []string
@@ -110,43 +113,77 @@ func mutateName(name string) string {
 func randomLanguageCategory() LanguageCategory {
 	languageCategories := []LanguageCategory{
 		LanguageCategory{
-			"musical",
-			2,
-			fricatives,
-			liquids,
-			sibilants,
-			[]string{"ion", "on", "en", "o"},
-			[]string{"i", "a", "ia", "ila"},
+			Name:             "musical",
+			WordLength:       2,
+			UsesApostrophes:  false,
+			Initiators:       fricatives,
+			Connectors:       liquids,
+			Finishers:        sibilants,
+			MasculineEndings: []string{"ion", "on", "en", "o"},
+			FeminineEndings:  []string{"i", "a", "ia", "ila"},
 		},
 		LanguageCategory{
-			"guttural",
-			1,
-			append(glottals, growls...),
-			velars,
-			velars,
-			[]string{"ur", "ar", "ach", "ag"},
-			[]string{"a", "agi"},
+			Name:             "guttural",
+			WordLength:       1,
+			UsesApostrophes:  false,
+			Initiators:       append(glottals, growls...),
+			Connectors:       velars,
+			Finishers:        velars,
+			MasculineEndings: []string{"ur", "ar", "ach", "ag"},
+			FeminineEndings:  []string{"a", "agi"},
 		},
 		LanguageCategory{
-			"abrupt",
-			2,
-			stops,
-			fricatives,
-			liquids,
-			[]string{"on", "en", "an"},
-			[]string{"a", "e", "et"},
+			Name:             "abrupt",
+			WordLength:       2,
+			UsesApostrophes:  true,
+			Initiators:       stops,
+			Connectors:       fricatives,
+			Finishers:        liquids,
+			MasculineEndings: []string{"on", "en", "an"},
+			FeminineEndings:  []string{"a", "e", "et"},
 		},
 		LanguageCategory{
-			"nasal",
-			2,
-			glottals,
-			stops,
-			nasals,
-			[]string{"een", "oon", "in", "en"},
-			[]string{"ini", "nia", "mia", "mi"},
+			Name:             "nasal",
+			WordLength:       2,
+			UsesApostrophes:  false,
+			Initiators:       glottals,
+			Connectors:       stops,
+			Finishers:        nasals,
+			MasculineEndings: []string{"een", "oon", "in", "en"},
+			FeminineEndings:  []string{"ini", "nia", "mia", "mi"},
+		},
+		LanguageCategory{
+			Name:             "rhythmic",
+			WordLength:       2,
+			UsesApostrophes:  false,
+			Initiators:       append(glottals, fricatives...),
+			Connectors:       append(liquids, fricatives...),
+			Finishers:        liquids,
+			MasculineEndings: []string{"ior", "iun", "ayan", "ar"},
+			FeminineEndings:  []string{"oa", "ua", "lia", "li"},
+		},
+		LanguageCategory{
+			Name:             "graceful",
+			WordLength:       2,
+			UsesApostrophes:  false,
+			Initiators:       consonants,
+			Connectors:       append(liquids, fricatives...),
+			Finishers:        append(stops, glottals...),
+			MasculineEndings: []string{"em", "amn", "astor", "est", "and"},
+			FeminineEndings:  []string{"eela", "aela", "ali", "eli", "oli", "oa", "ea"},
+		},
+		LanguageCategory{
+			Name:             "breathy",
+			WordLength:       1,
+			UsesApostrophes:  false,
+			Initiators:       append(breaths, fricatives...),
+			Connectors:       append(breaths, glides...),
+			Finishers:        append(stops, glottals...),
+			MasculineEndings: []string{"esh", "ashem", "eh", "ih", "ah"},
+			FeminineEndings:  []string{"eshi", "eha", "ala", "asha", "iha"},
 		},
 	}
-	return languageCategories[rand.Intn(len(languageCategories)-1)]
+	return languageCategories[rand.Intn(len(languageCategories))]
 }
 
 func randomLanguage() Language {
@@ -271,12 +308,23 @@ func (language Language) RandomName() string {
 	}
 
 	role := "connector"
+	syllable := ""
+	shouldIUseAnApostrophe := 0
 
 	for i := 0; i < randomLength; i++ {
 		if randomLength-i == 1 {
 			role = "finisher"
 		}
-		syllables = append(syllables, randomSyllable(language.Category, role))
+		syllable = randomSyllable(language.Category, role)
+
+		if language.Category.UsesApostrophes {
+			shouldIUseAnApostrophe = rand.Intn(10)
+			if shouldIUseAnApostrophe > 8 {
+				syllable += "'"
+			}
+		}
+
+		syllables = append(syllables, syllable)
 	}
 
 	for _, syllable := range syllables {
@@ -284,7 +332,7 @@ func (language Language) RandomName() string {
 	}
 
 	chance := rand.Intn(10) + 1
-	if chance > 3 {
+	if chance > 8 {
 		name = mutateName(name)
 	}
 

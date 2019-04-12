@@ -33,9 +33,9 @@ func GenerateCulture() Culture {
 
 	culture.Language = randomLanguage()
 
-	culture.CommonMaleNames = culture.Language.generateNameList("male")
-	culture.CommonFemaleNames = culture.Language.generateNameList("female")
-	culture.CommonFamilyNames = culture.Language.generateNameList("family")
+	culture.CommonMaleNames = culture.Language.GenerateNameList("male")
+	culture.CommonFemaleNames = culture.Language.GenerateNameList("female")
+	culture.CommonFamilyNames = culture.Language.GenerateNameList("family")
 
 	culture.Name = culture.Language.Name
 	culture.Adjective = culture.Language.Adjective
