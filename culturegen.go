@@ -11,6 +11,7 @@ type Culture struct {
 	Name              string
 	Adjective         string
 	Language          Language
+	Appearance        Appearance
 	CommonMaleNames   []string
 	CommonFamilyNames []string
 	CommonFemaleNames []string
@@ -51,6 +52,8 @@ func GenerateCulture() Culture {
 	culture.Curiosity = rand.Intn(culture.AttributeMax) + 1
 	culture.Rigidity = rand.Intn(culture.AttributeMax) + 1
 	culture.Superstition = rand.Intn(culture.AttributeMax) + 1
+
+	culture.Appearance = culture.generateAppearance()
 
 	culture.Religion = culture.generateReligion()
 
