@@ -40,26 +40,31 @@ func GenerateCulture() Culture {
 	culture.Name = culture.Language.Name
 	culture.Adjective = culture.Language.Adjective
 
-	culture.AttributeMax = 10
-	culture.Aggression = rand.Intn(culture.AttributeMax) + 1
-	culture.Curiosity = rand.Intn(culture.AttributeMax) + 1
-	culture.Rigidity = rand.Intn(culture.AttributeMax) + 1
-	culture.Superstition = rand.Intn(culture.AttributeMax) + 1
-
 	culture.HomeClimate = climategen.Generate()
 	culture.MusicStyle = culture.randomMusicStyle()
 	culture.ClothingStyle = culture.generateClothingStyle()
 	culture.FoodStyle = culture.generateFoodStyle()
 	culture.AlcoholicDrinks = culture.generateDrinks()
 
+	culture.AttributeMax = 100
+	culture.Aggression = rand.Intn(culture.AttributeMax) + 1
+	culture.Curiosity = rand.Intn(culture.AttributeMax) + 1
+	culture.Rigidity = rand.Intn(culture.AttributeMax) + 1
+	culture.Superstition = rand.Intn(culture.AttributeMax) + 1
+
 	culture.Religion = culture.generateReligion()
 
 	return culture
 }
 
-func (culture Culture) setClimate(climate string) {
-	culture.HomeClimate = climategen.GetClimate(climate)
-	culture.ClothingStyle = culture.generateClothingStyle()
-	culture.FoodStyle = culture.generateFoodStyle()
-	culture.AlcoholicDrinks = culture.generateDrinks()
+// SetClimate sets the climate and recalculates some traits
+func (culture Culture) SetClimate(climate string) Culture {
+	newCulture := culture
+	newCulture.HomeClimate = climategen.GetClimate(climate)
+	newCulture.MusicStyle = newCulture.randomMusicStyle()
+	newCulture.ClothingStyle = newCulture.generateClothingStyle()
+	newCulture.FoodStyle = newCulture.generateFoodStyle()
+	newCulture.AlcoholicDrinks = newCulture.generateDrinks()
+
+	return newCulture
 }
