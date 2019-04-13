@@ -20,6 +20,7 @@ type Appearance struct {
 	EyeShape         string
 	NoseShape        string
 	MouthShape       string
+	FacialHairStyles []string
 	HairColors       []string
 	HairConsistency  string
 	FemaleHairStyles []string
@@ -38,6 +39,7 @@ func (culture Culture) generateAppearance() Appearance {
 	appearance.HairConsistency = culture.calculateHairConsistency()
 	appearance.FemaleHairStyles = culture.calculateHairStyles()
 	appearance.MaleHairStyles = culture.calculateHairStyles()
+	appearance.FacialHairStyles = randomFacialHair()
 	appearance.EyeShape = randomEyeShape()
 	appearance.FaceShape = randomFaceShape()
 	appearance.MouthShape = randomMouthShape()
@@ -195,6 +197,33 @@ func (culture Culture) calculateHairStyles() []string {
 		possibleStyles = append(possibleStyles, "long dreadlocks")
 		possibleStyles = append(possibleStyles, "short dreadlocks")
 		possibleStyles = append(possibleStyles, "tight braids")
+	}
+
+	for i := 0; i < 3; i++ {
+		style = random.Item(possibleStyles)
+		if !inSlice(style, styles) {
+			styles = append(styles, style)
+		}
+	}
+
+	return styles
+}
+
+func randomFacialHair() []string {
+	var styles []string
+	var style string
+
+	possibleStyles := []string{
+		"full beard",
+		"short goatee",
+		"long goatee",
+		"handlebar mustache",
+		"long beard",
+		"short beard",
+		"mutton chops",
+		"clean shaven",
+		"trim mustache",
+		"narrow mustache",
 	}
 
 	for i := 0; i < 3; i++ {
