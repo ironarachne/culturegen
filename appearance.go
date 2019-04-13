@@ -46,13 +46,13 @@ func (culture Culture) generateAppearance() Appearance {
 	appearance.NoseShape = randomNoseShape()
 
 	appearance.MinFemaleHeight = rand.Intn(24) + 52
-	appearance.MaxFemaleHeight = appearance.MinFemaleHeight + rand.Intn(12)
+	appearance.MaxFemaleHeight = appearance.MinFemaleHeight + rand.Intn(12) + 1
 	appearance.MinMaleHeight = rand.Intn(24) + 52
-	appearance.MaxMaleHeight = appearance.MinMaleHeight + rand.Intn(12)
+	appearance.MaxMaleHeight = appearance.MinMaleHeight + rand.Intn(12) + 1
 	appearance.MinFemaleWeight = rand.Intn(30) + 90
-	appearance.MaxFemaleWeight = appearance.MinFemaleWeight + rand.Intn(80)
+	appearance.MaxFemaleWeight = appearance.MinFemaleWeight + rand.Intn(80) + 1
 	appearance.MinMaleWeight = rand.Intn(30) + 140
-	appearance.MaxMaleWeight = appearance.MinMaleWeight + rand.Intn(100)
+	appearance.MaxMaleWeight = appearance.MinMaleWeight + rand.Intn(100) + 1
 
 	appearance.UniqueTrait = randomUniqueTrait()
 
